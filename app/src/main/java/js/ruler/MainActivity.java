@@ -2,7 +2,10 @@ package js.ruler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     int kg=1000;
     boolean flag=false;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,27 +25,39 @@ public class MainActivity extends AppCompatActivity {
         p_cost=(EditText)findViewById(R.id.prime_cost);
         m_kg=(TextView) findViewById(R.id.kgs_val);
         m_cost=(TextView) findViewById(R.id.cost_val);
-        p_kg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        m_kg.setText(Integer.toString(kg));
+        p_kg.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                kg=Integer.parseInt(p_kg.getText().toString());
-                flag=true;
-                m_kg.setText(kg);
-                return true;
-            }
-        });
-        if (flag==false){
-            m_kg.setText(kg);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
-        p_cost.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                int cost=Integer.parseInt(p_cost.getText().toString());
-                m_cost.setText(cost);
-                return true;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                m_kg.setText(p_kg.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
+        p_cost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                m_cost.setText(p_cost.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 }
