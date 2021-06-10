@@ -11,16 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+
 public class MainActivity extends AppCompatActivity {
     EditText p_kg,p_cost,m_kg,m_cost;
-
     TextView[] calculate=new TextView[8];
     TextView[] invisable=new TextView[8];
     static int kg=1000;
     static int cost=0;
-
-
-
+    boolean flag=true;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -31,16 +29,50 @@ public class MainActivity extends AppCompatActivity {
         p_cost=findViewById(R.id.prime_cost);
         m_kg=findViewById(R.id.m_kg);
         m_cost=findViewById(R.id.m_cost);
+
         calculate= new TextView[]{ findViewById(R.id.val_1000),findViewById(R.id.val_500),  findViewById(R.id.val_250),  findViewById(R.id.val_125),  findViewById(R.id.val_100),
                  findViewById(R.id.val_50),  findViewById(R.id.kg_10),  findViewById(R.id.kg_5)};
         invisable= new TextView[]{ findViewById(R.id.kg_1000),findViewById(R.id.kg_500),  findViewById(R.id.kg_250),  findViewById(R.id.kg_125),  findViewById(R.id.kg_100),
                 findViewById(R.id.kg_50),  findViewById(R.id.val_10),  findViewById(R.id.val_5)};
-        m_kg.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        m_kg.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){caly();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(flag){
+                flag=false;
+                caly();
+            }
+            else return;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                flag=true;
+            }
+        });
+        m_cost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(flag){
+                    flag=false;
+                    calx();
                 }
+                else return;
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                flag=true;
             }
         });
         p_kg.addTextChangedListener(new TextWatcher() {
@@ -114,10 +146,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @SuppressLint("SetTextI18n")
     public void calx(){
-        m_cost.setText(Integer.toString((int)Math.ceil((*)/)));
+        int y=Integer.parseInt(m_cost.getText().toString());
+        int x=(int)Math.floor((y*kg)/cost);
+        m_cost.setText(Integer.toString(x));
     }
+    @SuppressLint("SetTextI18n")
     public void caly(){
-
+        int x=Integer.parseInt(m_kg.getText().toString());
+        int y=(int)Math.ceil((x*cost)/kg);
+        m_cost.setText(Integer.toString(y));
+        
     }
+
+
+
 }
