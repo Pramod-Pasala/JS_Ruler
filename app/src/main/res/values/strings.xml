@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JS_Ruler</string>
+    <string name="head">This is a Kg to Rs and Rs to Kg converter app .In the right top most cell enter the Rs value and see what happens</string>
 </resources>
