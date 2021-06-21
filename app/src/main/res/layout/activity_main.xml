@@ -21,14 +21,7 @@
             android:layout_margin="25dp"
             android:orientation="vertical"
             android:padding="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:text="@string/head"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,6 +39,9 @@
                     android:inputType="number"
                     android:textColorHint="@android:color/black"
                     android:textSize="24dp"
+                    android:background="@drawable/design"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                      />
 
                 <EditText
@@ -58,7 +54,10 @@
                     android:hint="RS"
                     android:inputType="number"
                     android:textColorHint="@android:color/black"
-                    android:textSize="24dp" />
+                    android:textSize="24dp"
+                    android:background="@drawable/design"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
 
 
             </LinearLayout>
@@ -69,30 +68,31 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <js.ruler.SyncEditText
+                <EditText
                     android:id="@+id/m_kg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:ems="10"
-
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     android:inputType="number"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:background="@drawable/design"/>
 
-                <js.ruler.SyncEditText
+                <EditText
                     android:id="@+id/m_cost"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:ems="10"
-
-
                     android:inputType="number"
-                    android:selectAllOnFocus="false"
-                    android:shadowColor="#B5B0B0"
-                    android:textSize="24sp" />
+                    android:background="@drawable/design"
+                    android:textSize="24sp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
 
 
             </LinearLayout>
