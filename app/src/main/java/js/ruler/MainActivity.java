@@ -63,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (s.length() != 0) {
                     sync = false;
+                    if(kg !=0 && cost !=0){
+                        PyObject obj = pyobj.callAttr("cal", 1, m_kg.getText().toString(), kg, cost);
+                        m_cost.setText(obj.toString());
+                    }
 
-                    PyObject obj = pyobj.callAttr("cal", 1, m_kg.getText().toString(), kg, cost);
-                    m_cost.setText(obj.toString());
                 } else {
                     sync = false;
                     m_cost.setText("");
@@ -89,10 +91,13 @@ public class MainActivity extends AppCompatActivity {
                     sync = true;
                     return;
                 }
-                if (s.length() != 0) {
+                if (s.length() != 0 ) {
                     sync = false;
-                    PyObject obj = pyobj.callAttr("cal", 1, m_cost.getText().toString(), kg, cost);
-                    m_kg.setText(obj.toString());
+                    if (kg!=0 && cost!=0) {
+                        PyObject obj = pyobj.callAttr("cal", 0, m_cost.getText().toString(), kg, cost);
+                        m_kg.setText(obj.toString());
+                    }
+
                 } else {
                     sync = false;
                     m_kg.setText("");
@@ -113,11 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0) {
+                if (s.length() != 0 ) {
                     kg = Integer.parseInt(p_kg.getText().toString());
-                    PyObject ob=pyobj2.callAttr("cal",kg,cost);
-                    int[][] arr=ob.toJava(int[][].class);
-                    display(arr[0],arr[1]);
+                    if (kg !=0 && cost !=0) {
+                        PyObject ob = pyobj2.callAttr("cal", kg, cost);
+                        int[][] arr=ob.toJava(int[][].class);
+                        display(arr[0],arr[1]);
+                    }
+
 
                 }
             }
@@ -138,10 +146,11 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     cost = Integer.parseInt(p_cost.getText().toString());
-                    PyObject ob=pyobj2.callAttr("cal",kg,cost);
-                    int[][] arr=ob.toJava(int[][].class);
-                    display(arr[0],arr[1]);
-
+                    if (kg !=0 && cost !=0) {
+                        PyObject ob = pyobj2.callAttr("cal", kg, cost);
+                        int[][] arr = ob.toJava(int[][].class);
+                        display(arr[0], arr[1]);
+                    }
                 }
 
             }

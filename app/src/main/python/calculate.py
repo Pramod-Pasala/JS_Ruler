@@ -5,6 +5,6 @@ def cal(flag,x,kg,cost):
     kg=float(kg)
     cost=float(cost)
     if flag:
-        return str((x*cost)/kg)
+        return str(round((x*cost)/kg,2))
     else:
         return str(round((x*kg)/cost,2))
